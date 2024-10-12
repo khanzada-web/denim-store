@@ -1,0 +1,97 @@
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.72.0">
+  <title>Album example · Bootstrap</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+
+</head>
+
+<body>
+
+  <header>
+    <div class="flex m-10 justify-between">
+        <div class="p-5 ml-14 text-3xl font-serif"><a href="#" class="font-bold italic text-sky-900">{{Website_Name}}</a></div>
+   
+        <div class="mr-14 p-4">
+            <button type="button" class="bg-transparent rounded">
+                <img src={% static "images/cart.png" %} alt="cart" class="h-10">
+            </button>
+        </div>
+        
+        
+    </div>
+
+  </header>
+
+  <main>
+    <section class="m-5">
+        <div class="m-5 flex">
+            
+            <div class="p-5 ml-14 flex flex-col flex-1 justify-center">
+                <h1 class="text-6xl text-sky-900 font-bold italic pt-16">{{hero1}}</h1>
+                <h1 class="text-5xl text-sky-900 font-bold italic pt-16">{{hero2}}</h1>
+                <h1 class="text-xl  text-sky-900 font-serif italic pt-16">{{hero3}}</h1>
+            </div>
+        
+            
+            <div class="p-5 mr-14 flex-1 flex justify-center items-center">
+                <img src={% static "/images/hero.jpg" %} alt="" class="h-200 w-96 rounded">
+            </div>
+        </div>
+        
+        <h1 class="mt-28 text-6xl text-sky-900 font-bold italic text-center">{{Head1}}</h1>
+        <form method="post" class="p-20" id="categoryForm">
+            {% csrf_token %}
+           <div class="p-8"> <h3 class="font-serif flex-1">{{ Catagories.Catagory }}</h3></div>
+           
+        </form>
+        <script>
+            
+            document.querySelectorAll('#categoryForm input[type=radio]').forEach(function(radio) {
+                radio.addEventListener('change', function() {
+                    
+                    document.getElementById('categoryForm').submit();
+                });
+            });
+        </script>
+
+            
+            
+        
+        <div class="m-20 flex justify-center">
+            {% for i in  Data %}
+
+            <div class="bg-gray-50 flex flex-col items-center p-4 rounded-lg shadow-md w-84 h-98 ml-10">
+
+                <img src="/media/{{i.icon_Image}}" alt="Item Image" class="h-64 w-72 object-cover mb-4 rounded">
+                <h2 class="text-lg font-bold mb-2 italic font-serif">{{i.Name}}</h2>
+                <p class="text-md text-black mb-4 font-bold ">Rs {{i.price}}</p>
+        
+                <button type="button" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                    Add to Cart
+                </button>
+            </div>
+            {% endfor %}
+            
+        </div>
+        
+    </section>
+
+
+  </main>
+
+  <footer class="">
+  
+  </footer>
+
+</body>
+
+</html>
